@@ -1,0 +1,31 @@
+{
+  "priority": 1,
+  "request": {
+    "method": "POST",
+    "url": "/api/cart/items",
+    "headers": {
+      "Authorization": {
+        "equalTo": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWUsImlhdCI6MTUxNjIzOTAyMn0.KMUFsIDTnFmyG3nMiGM6H9FNFUROf3wh7SmqJp-QV30"
+      },
+      "Content-Type": {
+        "equalTo": "application/json"
+      }
+    },
+    "bodyPatterns": [
+      {
+        "matchesJsonPath": "$[?(@.quantity <= 0)]"
+      }
+    ]
+  },
+  "response": {
+    "status": 400,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "jsonBody": {
+      "error": "INVALID_QUANTITY",
+      "message": "Quantity must be a positive value greater than 0.",
+      "field": "quantity"
+    }
+  }
+}
